@@ -4,7 +4,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import { Container, FileInfo, Preview } from './styles';
 import { MdCheckCircle, MdError, MdLink } from 'react-icons/md';
 
-const FileList = ({ files }) => {
+const FileList = ({ files, handleDelete }) => {
 
     return (
         <Container>
@@ -15,11 +15,10 @@ const FileList = ({ files }) => {
                     <div>
                         <strong>{uploadedFile.name}</strong>
                         <span>{uploadedFile.readableSize} 
-                        {!!uploadedFile.url &&  <button onClick={() => {}}>Supprimer</button>}                       
+                        {!!uploadedFile.url &&  <button onClick={() => handleDelete(uploadedFile.id)}>Supprimer</button>}                       
                         </span>
                     </div>
                 </FileInfo>
-
                 <div>
                     {!uploadedFile.uploaded && !uploadedFile.error && (
                          <CircularProgressbar 
@@ -36,7 +35,7 @@ const FileList = ({ files }) => {
                     )}
                    {uploadedFile.url && (
                        <a 
-                            href="http://localhost:3001/file/c6562673af745a2086c82b5c4291680a-bindings_1.jpg"
+                            href={uploadedFile.url}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
